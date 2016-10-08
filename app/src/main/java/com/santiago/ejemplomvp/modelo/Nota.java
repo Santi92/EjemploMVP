@@ -1,5 +1,7 @@
 package com.santiago.ejemplomvp.modelo;
 
+import android.database.Cursor;
+
 /**
  * Created by santiago on 6/10/16.
  */
@@ -58,5 +60,15 @@ public class Nota {
     public void setTitulo(String titulo) {
 
         this.titulo = titulo;
+    }
+
+    // Create a MunicipioGson object from a cursor
+    public  Nota fromCursor(Cursor cursorNotas) {
+        String titulo = cursorNotas.getString(0);
+        String texto = cursorNotas.getString(1);
+        String fecha = cursorNotas.getString(2);
+
+
+        return new Nota(titulo,texto,fecha);
     }
 }

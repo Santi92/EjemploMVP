@@ -65,11 +65,9 @@ public class MainPresenter
     @Override
     public void newNota(String textoNota,String textTitulo) {
 
-
-
         Nota note = new Nota();
+        note.setTitulo(textTitulo);
         note.setTexto(textoNota);
-        note.setTexto(textTitulo);
         note.setFecha(getDate());
 
 
@@ -112,6 +110,19 @@ public class MainPresenter
     public void onError(String errorMsg) {
         mView.get().showAlert(errorMsg);
     }
+
+
+    @Override
+    public void onProgressDialog(String titulo, String ms) {
+        this.mView.get().iniciarProgresDialog(titulo,ms);
+    }
+
+
+    @Override
+    public void onFinishProgressDialog() {
+        this.mView.get().finalizarProgresDialog();
+    }
+
 
     public String getDate(){
         return "2016-10-09";

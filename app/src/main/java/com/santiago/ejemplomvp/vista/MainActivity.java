@@ -1,5 +1,6 @@
 package com.santiago.ejemplomvp.vista;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,12 @@ public class MainActivity extends AppCompatActivity
     private EditText editTextNota;
 
     private EditText editTextTitulo;
+
+
+    /**
+     * La barra de progresos para la sincronización manual
+     */
+    private ProgressDialog progressDialog;
 
 
     protected final String TAG = getClass().getSimpleName();
@@ -134,4 +141,22 @@ public class MainActivity extends AppCompatActivity
         alertDialog.show(); // show the alert box
     }
 
+
+    @Override
+    public void iniciarProgresDialog(String titulo , String mgs) {
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Por favor espere");
+        progressDialog.setMessage("Guardando...");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+    }
+
+
+    @Override
+    public void finalizarProgresDialog() {
+        if( progressDialog != null)
+            progressDialog.dismiss();
+    }
 }

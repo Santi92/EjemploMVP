@@ -18,6 +18,11 @@ public interface MainMVP {
         void showToast(String msg);
 
         void showAlert(String msg);
+
+        void iniciarProgresDialog(String titulo , String mgs);
+
+        void finalizarProgresDialog();
+
     }
 
 
@@ -47,6 +52,9 @@ public interface MainMVP {
         void onNotaInserida(Nota novaNota);
         void onNotaRemovida(Nota notaRemovida);
         void onError(String errorMsg);
+        void onProgressDialog(String titulo,String ms);
+        void onFinishProgressDialog();
+
         // Cualquier otra operación de devolución Modelo -> Presentador
     }
 

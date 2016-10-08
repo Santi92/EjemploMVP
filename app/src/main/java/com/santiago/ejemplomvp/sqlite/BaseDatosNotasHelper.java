@@ -26,11 +26,18 @@ public class BaseDatosNotasHelper extends SQLiteOpenHelper {
 
         String NOMBRE_TABLA = "notas";
         String NOTA_ID = "nota_id";
+        String TITULO = "titulo";
         String TEXTO = "texto";
         String FECHA_CREACION = "fecha_creaciòn";
 
     }
 
+
+    /**
+     * Constructor principal de la clase
+     * Que nos permitira tener una instacia  a la DB de notas
+     * @param context
+     */
     public BaseDatosNotasHelper(Context context) {
         super(context, NOMBRE_BASE_DATOS, null, VERSION_ACTUAL);
 
@@ -46,9 +53,11 @@ public class BaseDatosNotasHelper extends SQLiteOpenHelper {
         // ---------------------------------------------------------------
         sqLiteDatabase.execSQL(String.format("CREATE TABLE %s (%s  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                         "%s text NOT NULL, " +
+                        "%s varchar(60) NOT NULL, " +
                         "%s timestamp NOT NULL )",
                 TablaNota.NOMBRE_TABLA, TablaNota.NOTA_ID,
                 TablaNota.TEXTO,
+                TablaNota.TITULO,
                 TablaNota.FECHA_CREACION));
     }
 

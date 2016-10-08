@@ -43,9 +43,12 @@ public class ServiciosNota {
         /**
          * Armar query de inserciòn
          */
-        String insert = "INSERT  INTO "+BaseDatosNotasHelper.TablaNota.NOMBRE_TABLA+" ("+BaseDatosNotasHelper.TablaNota.TEXTO+", "+BaseDatosNotasHelper.TablaNota.FECHA_CREACION+")" +
-                " VALUES ('"+notaNueva.getTexto()+"','" +
-                notaNueva.getFecha()+"');";
+        String insert = "INSERT  INTO "+BaseDatosNotasHelper.TablaNota.NOMBRE_TABLA+" ("+BaseDatosNotasHelper.TablaNota.TITULO+", " +
+                BaseDatosNotasHelper.TablaNota.TEXTO+", "+
+                ""+BaseDatosNotasHelper.TablaNota.FECHA_CREACION+")" +
+                " VALUES ('"+notaNueva.getTexto()+"'," +
+                " '"+notaNueva.getTitulo() + "',"+
+                "'" + notaNueva.getFecha()+"');";
 
         sqLiteDatabase.execSQL(insert);
 

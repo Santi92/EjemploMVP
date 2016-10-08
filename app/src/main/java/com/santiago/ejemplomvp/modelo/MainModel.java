@@ -2,7 +2,6 @@ package com.santiago.ejemplomvp.modelo;
 
 import android.database.SQLException;
 import android.os.AsyncTask;
-import android.os.Handler;
 
 import com.santiago.ejemplomvp.MainMVP;
 import com.santiago.ejemplomvp.sqlite.ServiciosNota;
@@ -36,7 +35,7 @@ public class MainModel
 
                 @Override
                 protected void onPreExecute() {
-
+                    mPresenter.onProgressDialog("Guardano nota","Espere por favor ...");
                     super.onPreExecute();
                 }
 
@@ -44,14 +43,12 @@ public class MainModel
                 @Override
                 protected Nota doInBackground( final Nota... notas) {
 
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override public void run() {
-                            serviciosNota.insertarNota(notas[0]);
-                        }
-                    }, 2000);
-
-
+                    try {
+                        Thread.sleep(2000);
+                    }catch(Exception e){
+                        return null;
+                    }
+                    serviciosNota.insertarNota(notas[0]);
 
                     return notas[0];
                 }
@@ -60,6 +57,7 @@ public class MainModel
                 @Override
                 protected void onPostExecute(Nota nota) {
 
+                    mPresenter.onFinishProgressDialog();
                     mPresenter.onNotaInserida(nota);
 
                 }
@@ -71,6 +69,7 @@ public class MainModel
 
 
         }catch(SQLException e){
+            mPresenter.onFinishProgressDialog();
             mPresenter.onError( e.getMessage() );
         }
 
