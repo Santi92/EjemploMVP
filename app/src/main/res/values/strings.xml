@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EjemploMVP</string>
+
+
+    <string name="ayuda_nueva_nota">Ingresa nueva nota</string>
+    <string name="ayuda_nueva_nota_titulo">Ingresa titulo</string>
+
+
+    <!-- Guardar nueva nota -->
+
+    <string name="boton_guardar_nota">Guardar</string>
+</resources>
