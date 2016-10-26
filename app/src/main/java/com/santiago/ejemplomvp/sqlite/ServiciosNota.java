@@ -1,9 +1,9 @@
 package com.santiago.ejemplomvp.sqlite;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.santiago.ejemplomvp.modelo.Nota;
 
@@ -39,7 +39,6 @@ public class ServiciosNota {
         // Obtener base de datos
         final SQLiteDatabase sqLiteDatabase = this.baseDatosNotasHelper.getReadableDatabase();
 
-        Log.d("Log id",""+notaNueva.getTexto());
         /**
          * Armar query de inserciòn
          */
@@ -51,7 +50,43 @@ public class ServiciosNota {
                 "'" + notaNueva.getFecha()+"');";
 
         sqLiteDatabase.execSQL(insert);
-
+        /**
+         * Cerramos DB
+         */
+        sqLiteDatabase.close();
     }
 
+
+    /**
+     * Obtener todas la notas registradas en la DB local
+     * @return  cursor de notas
+     */
+    public Cursor obtenerNotasLocales(){
+
+        /**
+         * @var  Cursor de notas
+         */
+        Cursor cursorNotas;
+
+
+        // Obtener base de datos
+        final SQLiteDatabase sqLiteDatabase = this.baseDatosNotasHelper.getReadableDatabase();
+
+        /**
+         * Construimos la sentencia para selecionar todas las notas
+         * insertadas
+         */
+
+        String sqlConsulta = "SELECT * FROM "+BaseDatosNotasHelper.TablaNota.NOMBRE_TABLA+" ";
+
+        cursorNotas = sqLiteDatabase.rawQuery(sqlConsulta,null);
+
+        /**
+         * Cerramos la DB
+         */
+        sqLiteDatabase.close();
+
+
+        return cursorNotas;
+    }
 }

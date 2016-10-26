@@ -32,29 +32,34 @@ public class ListarNotasAdapter extends RecyclerView.Adapter<ListarNotasAdapter.
     private final Context contexto;
 
     /**
-     *
+     * Cursor de notas de Sqlite
      */
     private Cursor cursorNotas;
 
     private OnItemClickListener onItemClickListener;
 
+
+    /**
+     * Para obtener la nota selecionada por el usuario
+     */
     public interface OnItemClickListener {
-        public void onClick(ViewHolder holder, Nota idAlquiler);
+        void onClick(ViewHolder holder, Nota idAlquiler);
     }
 
+    
     public class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         // Referencias UI
-        public TextView viewNombre;
-        public TextView viewCodigo;
+        public TextView viewTitulo;
+        public TextView viewFecha;
         public TextView viewRuta;
 
 
 
         public ViewHolder(View v) {
             super(v);
-            viewNombre = (TextView) v.findViewById(R.id.txtTitulo);
-            viewCodigo = (TextView) v.findViewById(R.id.txtCodigo);
+            viewTitulo = (TextView) v.findViewById(R.id.txtTitulo);
+            viewFecha = (TextView) v.findViewById(R.id.txtFecha);
 
 
             v.setOnClickListener(this);
@@ -98,9 +103,9 @@ public class ListarNotasAdapter extends RecyclerView.Adapter<ListarNotasAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         cursorNotas.moveToPosition(position);
 
-        holder.viewNombre.setText(cursorNotas.getString(0));
+        holder.viewTitulo.setText(cursorNotas.getString(0));
 
-        holder.viewCodigo.setText("Texto: "+ cursorNotas.getString(1));
+        holder.viewFecha.setText("Texto: "+ cursorNotas.getString(1));
 
 
         holder.viewRuta.setText("Fecha: "+ cursorNotas.getString(2));
